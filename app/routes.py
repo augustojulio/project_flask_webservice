@@ -1,6 +1,6 @@
-from flask import render_template
-from flask import request
 from app import app
+from flask import render_template, request, jsonify
+import requests
 
 @app.route("/")
 def index():
@@ -8,13 +8,19 @@ def index():
 
 @app.route('/city')
 # example: localhost:5000/cidade?id=<ID_DA_CIDADE>
-def success():
-    idd = request.args.get('id')
-    print(idd)
-    return idd
+def city():
+    id_city = request.args.get('id')
+    token = 'b22460a8b91ac5f1d48f5b7029891b53'
 
-# @app.route("/city", methods=["GET", "POST"])
-# def city():
-#     if request.form:
-#         print(request.form)
-#     return render_template("city.html")
+    print(id_city)
+    print(token)
+
+    url = 'http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/{0}/days/15?token={1}'.format(id_city, token)
+    forecast = requests.get(url).json()
+    
+    return jsonify(forecast)
+
+
+# http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/<ID_DA_CIDADE>/days/15?token=<TOKEN>
+
+
