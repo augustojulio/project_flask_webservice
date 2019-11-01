@@ -4,7 +4,7 @@ import requests
 
 @app.route("/")
 def index():
-	return "Para testar, por favor acesse a seguinte rota segundo o exemple: localhost:5000/city?id=<ID_DA_CIDADE>. id=3477 para cidade de São Paulo"
+	return "Para testar, por favor acesse a seguinte rota segundo o exemple: localhost:5000/city?id=ID_DA_CIDADE. Sendo id=3477 para cidade de São Paulo"
 
 @app.route('/city')
 # example: localhost:5000/cidade?id=<ID_DA_CIDADE>
@@ -17,10 +17,8 @@ def city():
 
     url = 'http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/{0}/days/15?token={1}'.format(id_city, token)
     forecast = requests.get(url).json()
-    
+
     return jsonify(forecast)
 
-
-# http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/<ID_DA_CIDADE>/days/15?token=<TOKEN>
 
 
