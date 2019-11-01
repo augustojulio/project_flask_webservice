@@ -1,6 +1,10 @@
+from flask import render_template
 from app import app
 
 @app.route('/')
-@app.route('/index')
 def index():
-	return "Index route"
+	return "Para testar, por favor acesse as seguintes rotas: /city"
+
+@app.route('/city')
+def city():
+	return render_template("city.html")
