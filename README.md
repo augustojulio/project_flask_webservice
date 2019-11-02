@@ -1,14 +1,23 @@
 # project_flask_webservice
 Webservice that uses a weather forecast service
 
-STEP-BY-STEP to run this app locally:
+## Installation
 
-1. clone it
-	1.1 $ git clone https://github.com/augustojulio/project_flask_webservice.git
+1. Clone it
 
-2. activate virtual env
-	2.1 $ cd project_flask_webservice
-	2.2 $ source venv/bin/activate
+```bash
+git clone https://github.com/augustojulio/project_flask_webservice.git
+```
 
-3. to run the app:
-	2.3 $ flask run
+2. Activate the virtual env
+
+```bash
+cd project_flask_webservice
+source venv/bin/activate
+```
+
+3. To run the app
+
+```bash
+flask run
+```
