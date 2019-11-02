@@ -16,3 +16,4 @@ class Forecast(BaseModel):
     temperatura_max = IntegerField()
 
 
+
