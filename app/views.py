@@ -1,4 +1,5 @@
 from app import app
+# from models import Forecast
 from flask import render_template, request, jsonify
 import requests
 
