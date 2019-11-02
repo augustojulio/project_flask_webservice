@@ -1,12 +1,9 @@
 from app import app
 from app import models
-from flask import render_template, request, jsonify
+from flask import request, jsonify
 import requests
 
 @app.route("/")
-def index():
-	return "Para testar, por favor acesse a seguinte rota segundo o exemple: localhost:5000/city?id=ID_DA_CIDADE. Sendo id=3477 para cidade de São Paulo"
-
 @app.route('/city')
 # example: localhost:5000/cidade?id=<ID_DA_CIDADE>
 def city():
