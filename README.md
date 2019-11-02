@@ -38,6 +38,6 @@ https://www.getpostman.com/collections/018af26ba30cfa88f0d6
 
 Suggestions to improve the project/code
 
-1. Add a migration framework for manage the DB
+1. Add a migration framework to manage the DB
 
 2. Add more layers to the project (initial project contains only model and view)
