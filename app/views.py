@@ -27,3 +27,12 @@ def city():
 
     return '', 204
 
+@app.route("/analysis")
+# example: localhost:5000/analysis?data_inicial=02/11/2019&data_final=05/11/2019
+def analysis():
+    initial_date = request.args.get('data_inicial')
+    final_date = request.args.get('data_final')
+    print(initial_date)
+    print(final_date)
+
+    return "got the user dates"

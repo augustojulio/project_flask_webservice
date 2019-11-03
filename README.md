@@ -32,7 +32,7 @@ flask run
 
 ## Documentation
 
-https://www.getpostman.com/collections/018af26ba30cfa88f0d6
+https://www.getpostman.com/collections/58c9c3e78731ff3ce9a6
 
 ## Next steps (backlog activities)
 
