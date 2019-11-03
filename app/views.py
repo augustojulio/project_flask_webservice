@@ -33,20 +33,28 @@ def city():
 def analysis():
     initial_date = request.args.get('data_inicial')
     final_date = request.args.get('data_final')
-    print(initial_date)
-    print(final_date)
+    # print(initial_date)
+    # print(final_date)
 
-    forecasts2 = models.Forecast.select().where(models.Forecast.data.between(initial_date, final_date))
+    list_results = []
 
-     # for forecast2 in forecasts2:
+    # forecasts2 = models.Forecast.select().where(models.Forecast.data.between(initial_date, final_date))
+    # for forecast2 in forecasts2:
     #     print('{} , {} , {} , {}'.format(forecast2.cidade, forecast2.data, forecast2.temperatura_max, forecast2.precipitacao))
 
     forecasts_max = models.Forecast.select(models.Forecast.cidade, models.Forecast.data, fn.MAX(models.Forecast.temperatura_max)).where(models.Forecast.data.between(initial_date, final_date))
     for forecast_max in forecasts_max:
-        print('A cidade com maior temperatura máxima no período espeficado é: {}'.format(forecast_max.cidade))
+        # print('A cidade com maior temperatura máxima no período espeficado é: {}'.format(forecast_max.cidade))
+        list_results.append('A cidade com maior temperatura máxima no período espeficado é: {}'.format(forecast_max.cidade))
 
     forecasts_avg = models.Forecast.select(models.Forecast.cidade, models.Forecast.data, fn.AVG(models.Forecast.precipitacao).alias('avg_precipitacao')).where(models.Forecast.data.between(initial_date, final_date)).group_by(models.Forecast.cidade)
     for forecast_avg in forecasts_avg:
-        print('{} , {} , {}'.format(forecast_avg.cidade, forecast_avg.data, forecast_avg.avg_precipitacao))
+        # print('A média de precipitação da cidade de {} é {}'.format(forecast_avg.cidade, forecast_avg.avg_precipitacao))
+        list_results.append('A média de precipitação da cidade de {} é {}'.format(forecast_avg.cidade, forecast_avg.avg_precipitacao))
 
-    return "precipitation average"
+    # print(list_results)
+    
+    list_results_string = '\n'.join(list_results)
+    # print(list_results_string)
+
+    return list_results_string
