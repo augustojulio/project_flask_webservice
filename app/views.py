@@ -35,4 +35,9 @@ def analysis():
     print(initial_date)
     print(final_date)
 
-    return "got the user dates"
+    forecasts2 = models.Forecast.select()
+    for forecast2 in forecasts2:
+        print('{} , {} , {} , {}'.format(forecast2.cidade, forecast2.data, forecast2.temperatura_max, forecast2.precipitacao))
+        # print('{} on {}'.format(note.text, note.created))
+
+    return "read info from db"
