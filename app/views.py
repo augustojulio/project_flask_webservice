@@ -38,14 +38,15 @@ def analysis():
 
     forecasts2 = models.Forecast.select().where(models.Forecast.data.between(initial_date, final_date))
 
+     # for forecast2 in forecasts2:
+    #     print('{} , {} , {} , {}'.format(forecast2.cidade, forecast2.data, forecast2.temperatura_max, forecast2.precipitacao))
+
     forecasts_max = models.Forecast.select(models.Forecast.cidade, models.Forecast.data, fn.MAX(models.Forecast.temperatura_max)).where(models.Forecast.data.between(initial_date, final_date))
     for forecast_max in forecasts_max:
         print('A cidade com maior temperatura máxima no período espeficado é: {}'.format(forecast_max.cidade))
 
-    # select cidade, data, max(temperatura_max) from forecast
-    # fn.MAX(models.Forecast.temperatura_max)
+    forecasts_avg = models.Forecast.select(models.Forecast.cidade, models.Forecast.data, fn.AVG(models.Forecast.precipitacao).alias('avg_precipitacao')).where(models.Forecast.data.between(initial_date, final_date)).group_by(models.Forecast.cidade)
+    for forecast_avg in forecasts_avg:
+        print('{} , {} , {}'.format(forecast_avg.cidade, forecast_avg.data, forecast_avg.avg_precipitacao))
 
-    # for forecast2 in forecasts2:
-    #     print('{} , {} , {} , {}'.format(forecast2.cidade, forecast2.data, forecast2.temperatura_max, forecast2.precipitacao))
-
-    return "max temperature"
+    return "precipitation average"
