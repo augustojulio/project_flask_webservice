@@ -1,14 +1,6 @@
 import os
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-import psycopg2
-
-# try:
-#     conn = psycopg2.connect("dbname=forecasts user='augusto' password='123456'")
-#     print("Connected to DB")
-# except:
-#     print("Problem to connect DB")
 
 APP_ROOT = os.path.dirname(os.path.realpath(__file__))
 

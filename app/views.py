@@ -4,12 +4,12 @@ from app import models
 from flask import request, jsonify
 from sqlalchemy import func, create_engine
 import requests
-import psycopg2
+from sqlalchemy.sql import select
 
 try:
     engine = create_engine('postgresql://augusto:123456@localhost/forecasts')
     conn = engine.connect()
-    print("Connected to DB with core1")
+    print("Connected to DB with core")
 except:
     print("Problem to connect DB with core")
 
@@ -30,10 +30,7 @@ def city():
                                     temperatura_min=i["temperature"]["min"],
                                     temperatura_max=i["temperature"]["max"],
                                     pais=forecast["country"],)
-        # print(forecast1)
         conn.execute(forecast1)
-        # db.session.add(forecast1)
-        # db.session.commit()
 
     return '', 204
 
@@ -45,15 +42,21 @@ def analysis():
 
     list_results = []
 
-    # forecasts_max = db.session.query(models.Forecast.cidade, models.Forecast.data, fn.MAX(models.Forecast.temperatura_max)).where(models.Forecast.data.between(initial_date, final_date))
-    forecasts_max = db.session.query(models.Forecast.cidade, models.Forecast.data, func.max(models.Forecast.temperatura_max))
-    for forecast_max in forecasts_max:
+    # forecasts_max = select([models.forecasts.c.cidade, models.forecasts.c.data, func.max(models.forecasts.c.temperatura_max)]).\
+    #     where(models.forecasts.c.data.between(initial_date, final_date))
+    forecasts_max = select([models.forecasts])
+    result = conn.execute(forecasts_max)
+    print(result)
+    # for forecast_max in forecasts_max:
+    for forecast_max in result:
         list_results.append('A cidade com maior temperatura máxima no período espeficado é: {}'.format(forecast_max.cidade))
+        print(list_results)
 
-    forecasts_avg = db.session.query(models.Forecast.cidade, models.Forecast.data, func.avg(models.Forecast.precipitacao).alias('avg_precipitacao')).where(models.Forecast.data.between(initial_date, final_date)).group_by(models.Forecast.cidade)
-    for forecast_avg in forecasts_avg:
-        list_results.append('A média de precipitação da cidade de {} é {}'.format(forecast_avg.cidade, forecast_avg.avg_precipitacao))
-
-    list_results_string = '\n'.join(list_results)
-
-    return list_results_string
+    # forecasts_avg = db.session.query(models.Forecast.cidade, models.Forecast.data, func.avg(models.Forecast.precipitacao).alias('avg_precipitacao')).where(models.Forecast.data.between(initial_date, final_date)).group_by(models.Forecast.cidade)
+    # for forecast_avg in forecasts_avg:
+    #     list_results.append('A média de precipitação da cidade de {} é {}'.format(forecast_avg.cidade, forecast_avg.avg_precipitacao))
+    #
+    # list_results_string = '\n'.join(list_results)
+    #
+    # return list_results_string
+    return '', 204
