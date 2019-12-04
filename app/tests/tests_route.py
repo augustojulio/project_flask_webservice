@@ -2,7 +2,7 @@ import os
 import unittest
 # from app import app
 class RoutingTests(unittest.TestCase):
-    # function to set up testing connection
+    # Function to set up testing connection
     def home(self):
          app.config["TESTING"] = True
          app.config["DEBUG"] = True
@@ -10,15 +10,15 @@ class RoutingTests(unittest.TestCase):
          self.assertEqual(app.debug,False)
          response = self.app.get('/', follow_redirects=True)
          self.assertEqual(response.status_code, 200)
-    # function to teardown connection after testing
-    #  def tear_down():
-    #       pass
-    #  def homepage():
-    #       response = self.app.get('/', follow_redirects = True)
-    #       self.assertEqual(response.status_code, 200)
-    # def aboutpage():
-    #       response = self.app.get('/', follow_redirects = True)
-    #       self.assertEqual(response.status_code, 200)
+    '''Function to teardown connection after testing
+     def tear_down():
+          pass
+     def homepage():
+          response = self.app.get('/', follow_redirects = True)
+          self.assertEqual(response.status_code, 200)
+    def aboutpage():
+          response = self.app.get('/', follow_redirects = True)
+          self.assertEqual(response.status_code, 200)'''
 
 
 if __name__ == "__main__":
