@@ -1,3 +1,6 @@
+"""
+views module
+"""
 import os
 from app import app
 from app import models
@@ -10,12 +13,12 @@ try:
     engine = create_engine('postgresql://augusto:123456@localhost/forecasts')
     conn = engine.connect()
     print("Connected to DB with core")
-except:
+except ConnectionError:
     print("Problem to connect DB with core")
 
 
-@app.route("/city")
 # Example: localhost:5000/city?id=<ID_DA_CIDADE>
+@app.route("/city")
 def city():
     id_city = request.args.get('id')
     token = os.getenv("TOKEN")
@@ -39,12 +42,9 @@ def city():
 
     return '', 204
 
-
-@app.route("/analysis")
 # Example:
 # localhost:5000/analysis?data_inicial=02/11/2019&data_final=05/11/2019
-
-
+@app.route("/analysis")
 def analysis():
     initial_date = request.args.get('data_inicial')
     final_date = request.args.get('data_final')
