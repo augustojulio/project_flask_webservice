@@ -1,7 +1,6 @@
-
 import os
 import unittest
-from app import app
+# from app import app
 class RoutingTests(unittest.TestCase):
     # function to set up testing connection
     def home(self):
@@ -24,4 +23,3 @@ class RoutingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
